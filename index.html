@@ -3,112 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Mood Studio - Expérience Émotionnelle</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>The Mood Studio - L'agence des émotions</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <script src="script.js"></script>
     <!-- Landing Page -->
-    <section class="landing" id="landing">
-        <div class="particles-container">
-            <!-- Particles simulées en CSS -->
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
+    <div id="landing">
+        <div class="landing-content">
+            <h1 class="title">The Mood Studio</h1>
+            <p class="subtitle">L'agence des émotions</p>
+            <button class="start-button">Commencer l'expérience</button>
         </div>
-        <h1 class="landing-title">THE MOOD STUDIO</h1>
-        <p class="landing-subtitle">Explorez différentes émotions à travers une expérience interactive immersive. Découvrez comment les couleurs, les mouvements et les formes peuvent traduire nos sentiments.</p>
-        <div class="scroll-indicator">Scrollez pour explorer</div>
-    </section>
-    
-    <!-- Navigation -->
-    <div class="nav">
-        <a href="#landing" class="nav-dot active"></a>
-        <a href="#joy" class="nav-dot"></a>
-        <a href="#calm" class="nav-dot"></a>
-        <a href="#surprise" class="nav-dot"></a>
     </div>
-    
-    <!-- Joie -->
-    <section class="emotion-section joy" id="joy">
-        <div class="joy-bubbles">
-            <!-- Bubbles simulées en CSS -->
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
+
+    <!-- Container des émotions -->
+    <div id="emotions-container">
+        <!-- Joie -->
+        <div id="joie" class="emotion">
+            <div class="sunshine"></div>
+            <div class="emotion-content">
+                <h2>Joie</h2>
+                <div class="text-animation-container">
+                    <p class="animated-text">La joie est un sentiment d'allégresse, de plaisir, de bonheur qui se manifeste par de la gaieté, de la bonne humeur. C'est une émotion agréable et profonde qui nous emporte et nous fait rayonner.</p>
+                </div>
+            </div>
         </div>
-        <h2 class="emotion-title">JOIE</h2>
-        <p class="emotion-description">La joie est une explosion de bonheur qui rayonne en nous. Elle est éclatante, effervescente et communicative, comme ces bulles qui s'élèvent avec légèreté. Ressentez cette énergie positive qui nous fait vibrer.</p>
-    </section>
-    
-    <!-- Calme -->
-    <section class="emotion-section calm" id="calm">
-        <div class="calm-waves">
-            <!-- Waves simulées en CSS -->
-            <div class="wave wave1"></div>
-            <div class="wave wave2"></div>
-            <div class="wave wave3"></div>
+
+        <!-- Calme -->
+        <div id="calme" class="emotion">
+            <div class="waves">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
+            <div class="emotion-content">
+                <h2>Calme</h2>
+                <div class="text-animation-container">
+                    <p class="animated-text">Le calme est un état de tranquillité, de sérénité. C'est l'absence d'agitation, de bruit, de trouble. Il nous permet de prendre du recul, de réfléchir et de nous recentrer sur l'essentiel.</p>
+                </div>
+            </div>
         </div>
-        <h2 class="emotion-title">CALME</h2>
-        <p class="emotion-description">Le calme est un état de sérénité, comme une mer paisible qui ondule doucement. C'est un moment de plénitude où le temps semble ralentir, où notre respiration devient profonde et apaisante.</p>
-    </section>
-    
-    <!-- Surprise -->
-    <section class="emotion-section surprise" id="surprise">
-        <div class="surprise-sparks">
-            <!-- Sparks simulées en CSS -->
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
-            <div class="spark"></div>
+
+        <!-- Surprise -->
+        <div id="surprise" class="emotion">
+            <div class="burst"></div>
+            <div class="emotion-content">
+                <h2>Surprise</h2>
+                <div class="text-animation-container">
+                    <p class="animated-text">La surprise est une émotion brève et soudaine causée par quelque chose d'inattendu. Elle nous sort de notre zone de confort et nous ouvre à de nouvelles perspectives.</p>
+                </div>
+            </div>
         </div>
-        <h2 class="emotion-title">SURPRISE</h2>
-        <p class="emotion-description">La surprise est cette émotion qui nous saisit soudainement. Elle stimule nos sens, dilate nos pupilles et accélère notre rythme cardiaque. C'est un moment d'émerveillement où notre perception du monde est réinitialisée.</p>
-    </section>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-buttons">
+        <button id="joy-btn" class="nav-btn">😊</button>
+        <button id="calm-btn" class="nav-btn">😌</button>
+        <button id="surprise-btn" class="nav-btn">😲</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
