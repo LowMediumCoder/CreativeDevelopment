@@ -94,6 +94,38 @@ body {
     transition: transform 1s ease;
 }
 
+/* Indicateur de défilement */
+.scroll-indicator {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-indicator.visible {
+    opacity: 1;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.indicator-dot.active {
+    background-color: white;
+    transform: scale(1.2);
+}
+
 /* Styles communs aux sections d'émotions */
 .emotion {
     position: absolute;
@@ -163,6 +195,23 @@ body {
 /* Emotion spécifique : Joie */
 #joie {
     background: linear-gradient(135deg, #FFDE59, #FF914D);
+    transition: background 1.5s ease;
+}
+
+#joie.active {
+    animation: colorShiftJoie 15s infinite alternate;
+}
+
+@keyframes colorShiftJoie {
+    0% {
+        background: linear-gradient(135deg, #FFDE59, #FF914D);
+    }
+    50% {
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+    }
+    100% {
+        background: linear-gradient(135deg, #FFFF00, #FF8C00);
+    }
 }
 
 .sunshine {
@@ -176,6 +225,29 @@ body {
     border-radius: 50%;
     animation: pulse 4s infinite alternate;
     z-index: 1;
+    filter: blur(20px);
+}
+
+#joie.active .sunshine {
+    animation: sunshineActive 8s infinite alternate;
+}
+
+@keyframes sunshineActive {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+        filter: blur(20px);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 0.9;
+        filter: blur(15px);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 1;
+        filter: blur(10px);
+    }
 }
 
 .joie-particle {
@@ -183,6 +255,7 @@ body {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
     animation: float 10s infinite linear;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
 }
 
 @keyframes pulse {
@@ -199,15 +272,37 @@ body {
 @keyframes float {
     0% {
         transform: translateY(0) rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
     }
     100% {
         transform: translateY(-100vh) rotate(360deg);
+        opacity: 0.5;
     }
 }
 
 /* Emotion spécifique : Calme */
 #calme {
     background: linear-gradient(135deg, #3F7CAC, #6AABD2);
+    transition: background 1.5s ease;
+}
+
+#calme.active {
+    animation: calmeBgAnimation 20s infinite alternate;
+}
+
+@keyframes calmeBgAnimation {
+    0% {
+        background: linear-gradient(135deg, #3F7CAC, #6AABD2);
+    }
+    50% {
+        background: linear-gradient(135deg, #4682B4, #87CEEB);
+    }
+    100% {
+        background: linear-gradient(135deg, #5F9EA0, #ADD8E6);
+    }
 }
 
 .waves {
@@ -220,6 +315,22 @@ body {
     opacity: 0.7;
 }
 
+#calme.active .waves {
+    animation: wavesOpacity 8s infinite alternate;
+}
+
+@keyframes wavesOpacity {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
 .wave {
     position: absolute;
     bottom: 0;
@@ -229,18 +340,33 @@ body {
     background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(255, 255, 255, 0.5)" d="M0,192L60,181.3C120,171,240,149,360,149.3C480,149,600,171,720,192C840,213,960,235,1080,229.3C1200,224,1320,192,1380,176L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
     background-size: 100% 100%;
     animation: wave 15s linear infinite;
+    filter: blur(1px);
 }
 
 .wave:nth-child(2) {
     height: 80px;
     animation-duration: 13s;
     opacity: 0.6;
+    filter: blur(2px);
 }
 
 .wave:nth-child(3) {
     height: 60px;
     animation-duration: 18s;
     opacity: 0.4;
+    filter: blur(3px);
+}
+
+#calme.active .wave {
+    animation: waveActive 15s linear infinite;
+}
+
+#calme.active .wave:nth-child(2) {
+    animation: waveActive 13s linear infinite;
+}
+
+#calme.active .wave:nth-child(3) {
+    animation: waveActive 18s linear infinite;
 }
 
 @keyframes wave {
@@ -252,9 +378,73 @@ body {
     }
 }
 
+@keyframes waveActive {
+    0% {
+        transform: translateX(0) scaleY(1);
+    }
+    50% {
+        transform: translateX(-50%) scaleY(1.1);
+    }
+    100% {
+        transform: translateX(-100%) scaleY(1);
+    }
+}
+
+/* Ajout de particules flottantes pour le calme */
+.calme-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    filter: blur(2px);
+    animation: floatCalme 15s infinite linear;
+}
+
+@keyframes floatCalme {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+    }
+    25% {
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(30px, 20px);
+        opacity: 0.8;
+    }
+    75% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(0px, 40px);
+        opacity: 0.3;
+    }
+}
+
 /* Emotion spécifique : Surprise */
 #surprise {
     background: linear-gradient(135deg, #823BBE, #FF57B9);
+    transition: background 1.5s ease;
+}
+
+#surprise.active {
+    animation: surpriseBgShift 8s infinite alternate;
+}
+
+@keyframes surpriseBgShift {
+    0% {
+        background: linear-gradient(135deg, #823BBE, #FF57B9);
+    }
+    33% {
+        background: linear-gradient(135deg, #9932CC, #FF69B4);
+    }
+    66% {
+        background: linear-gradient(135deg, #800080, #FF1493);
+    }
+    100% {
+        background: linear-gradient(135deg, #9370DB, #FF00FF);
+    }
 }
 
 .burst {
@@ -271,6 +461,11 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
     transform: scale(0);
     animation: burst 4s infinite;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+#surprise.active .circle-burst {
+    animation: burstActive 4s infinite;
 }
 
 @keyframes burst {
@@ -281,6 +476,41 @@ body {
     100% {
         transform: scale(3);
         opacity: 0;
+    }
+}
+
+@keyframes burstActive {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        background-color: rgba(255, 200, 255, 0.4);
+    }
+    100% {
+        transform: scale(3) rotate(180deg);
+        opacity: 0;
+        background-color: rgba(255, 150, 255, 0.1);
+    }
+}
+
+/* Étoiles pour la surprise */
+.star {
+    position: absolute;
+    background-color: white;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.2;
+        transform: scale(0.8) rotate(0deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.2) rotate(45deg);
     }
 }
 
@@ -302,18 +532,92 @@ body {
 /* Animation pour le texte descriptif */
 .text-animation-container {
     overflow: hidden;
+    position: relative;
 }
 
 .animated-text {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
+    line-height: 1.7;
+    text-align: left;
+    padding: 10px 5px;
 }
 
 .active .animated-text {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.3s;
+}
+
+/* Animations spécifiques au survol pour chaque émotion */
+#joie .emotion-content:hover .animated-text {
+    color: #FFFF00;
+    text-shadow: 0 0 8px rgba(255, 255, 0, 0.7);
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+#calme .emotion-content:hover .animated-text {
+    color: #E0FFFF;
+    text-shadow: 0 0 8px rgba(224, 255, 255, 0.7);
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+#surprise .emotion-content:hover .animated-text {
+    color: #FFC0CB;
+    text-shadow: 0 0 8px rgba(255, 192, 203, 0.7);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+/* Animations de lettres pour le texte */
+.letter {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+#joie .emotion-content:hover .letter {
+    animation: bounce 0.6s ease infinite alternate;
+    animation-delay: calc(0.05s * var(--i));
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+#calme .emotion-content:hover .letter {
+    animation: wave 1.2s ease-in-out infinite;
+    animation-delay: calc(0.05s * var(--i));
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+#surprise .emotion-content:hover .letter {
+    animation: pop 0.4s ease infinite alternate;
+    animation-delay: calc(0.03s * var(--i));
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
 }
 
 /* Landing animation */
